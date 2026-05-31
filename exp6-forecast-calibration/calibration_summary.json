@@ -1,0 +1,193 @@
+{
+  "model": "Qwen/Qwen2.5-3B-Instruct",
+  "K_saturation": 10,
+  "train_fraction": 0.8,
+  "n_total": 1646,
+  "n_train": 1316,
+  "n_holdout": 330,
+  "final_beta_per_topic": {
+    "AI & Tech": {
+      "alpha": 9.0,
+      "beta": 39.0,
+      "base": 0.1875,
+      "n": 46.0,
+      "lam": 0.8214285714285714
+    },
+    "Climate & Weather": {
+      "alpha": 20.0,
+      "beta": 45.0,
+      "base": 0.3076923076923077,
+      "n": 63.0,
+      "lam": 0.863013698630137
+    },
+    "Entertainment & Culture": {
+      "alpha": 2.0,
+      "beta": 8.0,
+      "base": 0.2,
+      "n": 8.0,
+      "lam": 0.4444444444444444
+    },
+    "Geopolitics & Conflict": {
+      "alpha": 15.0,
+      "beta": 84.0,
+      "base": 0.15151515151515152,
+      "n": 97.0,
+      "lam": 0.9065420560747663
+    },
+    "Macro & Financial Indicators": {
+      "alpha": 54.0,
+      "beta": 125.0,
+      "base": 0.3016759776536313,
+      "n": 177.0,
+      "lam": 0.946524064171123
+    },
+    "Markets & Crypto": {
+      "alpha": 243.0,
+      "beta": 183.0,
+      "base": 0.5704225352112676,
+      "n": 424.0,
+      "lam": 0.9769585253456221
+    },
+    "Politics & Elections": {
+      "alpha": 22.0,
+      "beta": 66.0,
+      "base": 0.25,
+      "n": 86.0,
+      "lam": 0.8958333333333334
+    },
+    "Public Health": {
+      "alpha": 2.0,
+      "beta": 169.0,
+      "base": 0.011695906432748537,
+      "n": 169.0,
+      "lam": 0.9441340782122905
+    },
+    "Sports & Games": {
+      "alpha": 63.0,
+      "beta": 185.0,
+      "base": 0.2540322580645161,
+      "n": 246.0,
+      "lam": 0.9609375
+    }
+  },
+  "holdout_global": {
+    "n_holdout": 330,
+    "true_YES_rate": 0.276,
+    "brier_a_raw": 0.3039,
+    "brier_b_base_only": 0.189,
+    "brier_c_mix": 0.189,
+    "delta_c_vs_a": -0.1149,
+    "delta_c_vs_b": 0.0
+  },
+  "holdout_per_topic": {
+    "AI & Tech": {
+      "n_holdout": 22,
+      "true_YES_rate": 0.182,
+      "training_n_resolutions": 46.0,
+      "training_base": 0.188,
+      "lambda_at_end": 0.821,
+      "brier_a_raw": 0.3443,
+      "brier_b_base_only": 0.1488,
+      "brier_c_mix": 0.1472,
+      "delta_c_vs_a": -0.1971,
+      "delta_c_vs_b": -0.0016
+    },
+    "Climate & Weather": {
+      "n_holdout": 5,
+      "true_YES_rate": 0.2,
+      "training_n_resolutions": 63.0,
+      "training_base": 0.308,
+      "lambda_at_end": 0.863,
+      "brier_a_raw": 0.4465,
+      "brier_b_base_only": 0.1716,
+      "brier_c_mix": 0.1866,
+      "delta_c_vs_a": -0.2599,
+      "delta_c_vs_b": 0.015
+    },
+    "Entertainment & Culture": {
+      "n_holdout": 5,
+      "true_YES_rate": 0.0,
+      "training_n_resolutions": 8.0,
+      "training_base": 0.2,
+      "lambda_at_end": 0.444,
+      "brier_a_raw": 0.02,
+      "brier_b_base_only": 0.04,
+      "brier_c_mix": 0.0251,
+      "delta_c_vs_a": 0.0051,
+      "delta_c_vs_b": -0.0149
+    },
+    "Geopolitics & Conflict": {
+      "n_holdout": 15,
+      "true_YES_rate": 0.4,
+      "training_n_resolutions": 97.0,
+      "training_base": 0.152,
+      "lambda_at_end": 0.907,
+      "brier_a_raw": 0.5394,
+      "brier_b_base_only": 0.3017,
+      "brier_c_mix": 0.3006,
+      "delta_c_vs_a": -0.2388,
+      "delta_c_vs_b": -0.0011
+    },
+    "Macro & Financial Indicators": {
+      "n_holdout": 16,
+      "true_YES_rate": 0.188,
+      "training_n_resolutions": 177.0,
+      "training_base": 0.302,
+      "lambda_at_end": 0.947,
+      "brier_a_raw": 0.3203,
+      "brier_b_base_only": 0.1654,
+      "brier_c_mix": 0.1688,
+      "delta_c_vs_a": -0.1515,
+      "delta_c_vs_b": 0.0034
+    },
+    "Markets & Crypto": {
+      "n_holdout": 142,
+      "true_YES_rate": 0.437,
+      "training_n_resolutions": 424.0,
+      "training_base": 0.57,
+      "lambda_at_end": 0.977,
+      "brier_a_raw": 0.3098,
+      "brier_b_base_only": 0.2639,
+      "brier_c_mix": 0.2633,
+      "delta_c_vs_a": -0.0465,
+      "delta_c_vs_b": -0.0006
+    },
+    "Politics & Elections": {
+      "n_holdout": 37,
+      "true_YES_rate": 0.189,
+      "training_n_resolutions": 86.0,
+      "training_base": 0.25,
+      "lambda_at_end": 0.896,
+      "brier_a_raw": 0.3765,
+      "brier_b_base_only": 0.1571,
+      "brier_c_mix": 0.1633,
+      "delta_c_vs_a": -0.2132,
+      "delta_c_vs_b": 0.0062
+    },
+    "Public Health": {
+      "n_holdout": 39,
+      "true_YES_rate": 0.026,
+      "training_n_resolutions": 169.0,
+      "training_base": 0.012,
+      "lambda_at_end": 0.944,
+      "brier_a_raw": 0.0949,
+      "brier_b_base_only": 0.0252,
+      "brier_c_mix": 0.0233,
+      "delta_c_vs_a": -0.0716,
+      "delta_c_vs_b": -0.0019
+    },
+    "Sports & Games": {
+      "n_holdout": 49,
+      "true_YES_rate": 0.143,
+      "training_n_resolutions": 246.0,
+      "training_base": 0.254,
+      "lambda_at_end": 0.961,
+      "brier_a_raw": 0.3169,
+      "brier_b_base_only": 0.1348,
+      "brier_c_mix": 0.133,
+      "delta_c_vs_a": -0.1839,
+      "delta_c_vs_b": -0.0018
+    }
+  },
+  "_note": "Aggregate-only summary. Per-question hold-out rows (id, topic, outcome, p_raw, p_base_only, p_mix) are regenerable by running `python3 run_calibration.py` after downloading ForecastBench \u2014 see DATA.md."
+}

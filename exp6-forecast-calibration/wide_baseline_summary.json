@@ -1,0 +1,124 @@
+{
+  "model": "Qwen/Qwen2.5-3B-Instruct",
+  "n_sample": 250,
+  "seed": 100,
+  "parse_failures": 0,
+  "overall": {
+    "brier": 0.3586,
+    "mean_P": 0.489,
+    "true_YES_rate": 0.34,
+    "reference_brier_alwaysNO": 0.34,
+    "reference_brier_baserate": 0.2244
+  },
+  "per_topic": {
+    "AI & Tech": {
+      "n": 15,
+      "n_YES": 5,
+      "true_YES_rate": 0.333,
+      "mean_P": 0.57,
+      "brier": 0.3796,
+      "bias_meanP_minus_trueYES": 0.237,
+      "mean_P_on_YES": 0.576,
+      "mean_P_on_NO": 0.567,
+      "discrimination": 0.009,
+      "p_stdev": 0.325
+    },
+    "Climate & Weather": {
+      "n": 8,
+      "n_YES": 2,
+      "true_YES_rate": 0.25,
+      "mean_P": 0.763,
+      "brier": 0.475,
+      "bias_meanP_minus_trueYES": 0.513,
+      "mean_P_on_YES": 0.75,
+      "mean_P_on_NO": 0.767,
+      "discrimination": -0.017,
+      "p_stdev": 0.136
+    },
+    "Entertainment & Culture": {
+      "n": 2,
+      "n_YES": 0,
+      "true_YES_rate": 0.0,
+      "mean_P": 0.435,
+      "brier": 0.3614,
+      "bias_meanP_minus_trueYES": 0.435,
+      "mean_P_on_YES": null,
+      "mean_P_on_NO": 0.435,
+      "discrimination": null,
+      "p_stdev": 0.415
+    },
+    "Geopolitics & Conflict": {
+      "n": 19,
+      "n_YES": 3,
+      "true_YES_rate": 0.158,
+      "mean_P": 0.354,
+      "brier": 0.3411,
+      "bias_meanP_minus_trueYES": 0.196,
+      "mean_P_on_YES": 0.267,
+      "mean_P_on_NO": 0.37,
+      "discrimination": -0.103,
+      "p_stdev": 0.377
+    },
+    "Macro & Financial Indicators": {
+      "n": 30,
+      "n_YES": 9,
+      "true_YES_rate": 0.3,
+      "mean_P": 0.713,
+      "brier": 0.4947,
+      "bias_meanP_minus_trueYES": 0.413,
+      "mean_P_on_YES": 0.678,
+      "mean_P_on_NO": 0.728,
+      "discrimination": -0.05,
+      "p_stdev": 0.306
+    },
+    "Markets & Crypto": {
+      "n": 78,
+      "n_YES": 46,
+      "true_YES_rate": 0.59,
+      "mean_P": 0.462,
+      "brier": 0.2838,
+      "bias_meanP_minus_trueYES": -0.128,
+      "mean_P_on_YES": 0.484,
+      "mean_P_on_NO": 0.43,
+      "discrimination": 0.054,
+      "p_stdev": 0.227
+    },
+    "Politics & Elections": {
+      "n": 23,
+      "n_YES": 7,
+      "true_YES_rate": 0.304,
+      "mean_P": 0.45,
+      "brier": 0.4801,
+      "bias_meanP_minus_trueYES": 0.145,
+      "mean_P_on_YES": 0.3,
+      "mean_P_on_NO": 0.515,
+      "discrimination": -0.215,
+      "p_stdev": 0.395
+    },
+    "Public Health": {
+      "n": 26,
+      "n_YES": 0,
+      "true_YES_rate": 0.0,
+      "mean_P": 0.162,
+      "brier": 0.135,
+      "bias_meanP_minus_trueYES": 0.162,
+      "mean_P_on_YES": null,
+      "mean_P_on_NO": 0.162,
+      "discrimination": null,
+      "p_stdev": 0.33
+    },
+    "Sports & Games": {
+      "n": 49,
+      "n_YES": 13,
+      "true_YES_rate": 0.265,
+      "mean_P": 0.572,
+      "brier": 0.4371,
+      "bias_meanP_minus_trueYES": 0.306,
+      "mean_P_on_YES": 0.654,
+      "mean_P_on_NO": 0.542,
+      "discrimination": 0.112,
+      "p_stdev": 0.438
+    }
+  },
+  "_note": "Aggregate-only summary. Per-question rows (id, topic, outcome, p) are regenerable by running `python3 wide_baseline.py` after downloading ForecastBench \u2014 see DATA.md."
+}

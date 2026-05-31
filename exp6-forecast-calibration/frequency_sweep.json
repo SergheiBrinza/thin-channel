@@ -1,0 +1,97 @@
+{
+  "K": 10,
+  "train_frac": 0.8,
+  "n_total": 1646,
+  "n_train": 1316,
+  "n_holdout": 330,
+  "schedules": [
+    {
+      "name": "day",
+      "period_days": 1,
+      "holdout_brier_final": 0.20591065076243176,
+      "holdout_brier_base_only": 0.21031801518975246,
+      "holdout_brier_raw": 0.30387727272727266,
+      "total_revealed": 1316.0
+    },
+    {
+      "name": "3 days",
+      "period_days": 3,
+      "holdout_brier_final": 0.20591174716369573,
+      "holdout_brier_base_only": 0.21031753069025927,
+      "holdout_brier_raw": 0.30387727272727266,
+      "total_revealed": 1315.0
+    },
+    {
+      "name": "week",
+      "period_days": 7,
+      "holdout_brier_final": 0.21204298381793255,
+      "holdout_brier_base_only": 0.21799144508408289,
+      "holdout_brier_raw": 0.30387727272727266,
+      "total_revealed": 1313.0
+    },
+    {
+      "name": "2 weeks",
+      "period_days": 14,
+      "holdout_brier_final": 0.2110859066390593,
+      "holdout_brier_base_only": 0.2173445920925949,
+      "holdout_brier_raw": 0.30387727272727266,
+      "total_revealed": 1313.0
+    },
+    {
+      "name": "month",
+      "period_days": 30,
+      "holdout_brier_final": 0.21155333185098588,
+      "holdout_brier_base_only": 0.2178103272838319,
+      "holdout_brier_raw": 0.30387727272727266,
+      "total_revealed": 1277.0
+    },
+    {
+      "name": "2 months",
+      "period_days": 60,
+      "holdout_brier_final": 0.2213199796549547,
+      "holdout_brier_base_only": 0.23042800795763183,
+      "holdout_brier_raw": 0.30387727272727266,
+      "total_revealed": 1173.0
+    },
+    {
+      "name": "quarter",
+      "period_days": 90,
+      "holdout_brier_final": 0.22188783211094848,
+      "holdout_brier_base_only": 0.23124628600106487,
+      "holdout_brier_raw": 0.30387727272727266,
+      "total_revealed": 1022.0
+    },
+    {
+      "name": "half year",
+      "period_days": 180,
+      "holdout_brier_final": 0.21069024112836185,
+      "holdout_brier_base_only": 0.2196620786086268,
+      "holdout_brier_raw": 0.30387727272727266,
+      "total_revealed": 417.0
+    },
+    {
+      "name": "270 days",
+      "period_days": 270,
+      "holdout_brier_final": 0.2185959326736012,
+      "holdout_brier_base_only": 0.23152855914970502,
+      "holdout_brier_raw": 0.30387727272727266,
+      "total_revealed": 220.0
+    },
+    {
+      "name": "year",
+      "period_days": 365,
+      "holdout_brier_final": 0.2230713901939757,
+      "holdout_brier_base_only": 0.21615697496600672,
+      "holdout_brier_raw": 0.30387727272727266,
+      "total_revealed": 417.0
+    },
+    {
+      "name": "never",
+      "period_days": null,
+      "holdout_brier_final": 0.30387727272727266,
+      "holdout_brier_base_only": 0.25,
+      "holdout_brier_raw": 0.30387727272727266,
+      "total_revealed": 0.0
+    }
+  ]
+}
