@@ -110,3 +110,8 @@ sharply. That threshold = "the thickness of the thin channel".
 - "Does the model itself understand" — no, just like in previous experiments: the entire
   honesty machinery lives in the external notebook; model weights are not touched.
 - Complex multi-category outcomes — binary only.
+
+---
+
+*Actuals: see FINDINGS sections 2–4 (1,646 questions, 11 schedules, no separate Manifold
+integration, Beta kept in memory inside `run_frequency_sweep.simulate`).*

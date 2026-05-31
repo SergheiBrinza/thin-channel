@@ -14,7 +14,9 @@ The full design and findings live in `DESIGN.md` and
 Set up the dataset and Qwen models first (see top-level `DATA.md`), then:
 
 ```bash
-python3 prepare_forecastbench.py    # normalize 1,646 resolved binary Qs
+python3 prepare_forecastbench.py    # normalize 1,646 resolved binary Qs and
+                                    # substitute date placeholders ->
+                                    # forecastbench_clean.json
 python3 classify_topics.py          # Qwen2.5-7B topic labels (9 topics)
 python3 pilot_baseline.py           # raw 3B over 50 random Qs (sanity check)
 python3 wide_baseline.py            # raw 3B over 250 with per-topic breakdown
@@ -37,7 +39,9 @@ and `gen_raw_predictions` touch the GPU. `run_calibration` and
 
 ### Scripts (committed)
 - `prepare_forecastbench.py` — extract resolved atomic binary questions from
-  the raw ForecastBench dump and normalize them
+  the raw ForecastBench dump, normalize them, and substitute date placeholders
+  ({forecast_due_date}, {resolution_date}) into model-facing question_text /
+  background_text fields
 - `classify_topics.py` — 9-topic classifier (Qwen2.5-7B via vLLM)
 - `pilot_baseline.py` — raw 3B baseline on 50 random questions
 - `wide_baseline.py` — raw 3B baseline on 250 questions with per-topic breakdown
@@ -60,9 +64,8 @@ and `gen_raw_predictions` touch the GPU. `run_calibration` and
 ### Not committed (regenerate locally; see top-level `DATA.md`)
 - `forecastbench_raw/` — raw ForecastBench dump from `hf download`
   (CC BY-SA 4.0, not redistributed)
-- `forecastbench_normalized.json`, `forecastbench_clean.json`,
-  `questions_with_topics.json` — derived dataset artifacts (contain question
-  text and resolved outcomes)
+- `forecastbench_clean.json`, `questions_with_topics.json` — derived dataset
+  artifacts (contain question text and resolved outcomes)
 - `raw_predictions.json`, `pilot_baseline.json` — model outputs that embed
   full question text and resolved outcomes
 - `wide_baseline.json`, `calibration_results.json` — full per-row dumps

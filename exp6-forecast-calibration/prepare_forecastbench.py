@@ -1,8 +1,14 @@
 #!/usr/bin/env python3
-"""Step 1: normalize resolved binary ForecastBench questions.
+"""Step 1: normalize resolved binary ForecastBench questions and substitute date
+placeholders into question wording.
 We iterate over every (question_set, resolution_set) pair, join by id, keep only atomic
 (non-combo) questions where resolution is True and resolved_to is in {0.0, 1.0}.
-Writes forecastbench_normalized.json plus a short summary."""
+For each kept record we also produce two model-facing fields:
+  - question_text:   the question with {forecast_due_date} and {resolution_date}
+                     placeholders substituted by concrete YYYY-MM-DD strings
+                     (838 and 1063 occurrences in the dataset, respectively)
+  - background_text: a verbatim copy of background (no placeholders occur there)
+Writes forecastbench_clean.json plus a short summary."""
 import os
 import json
 import glob
@@ -11,6 +17,17 @@ from collections import Counter
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 RAW = os.path.join(HERE, "forecastbench_raw", "datasets")
+
+
+def fill_placeholders(text, freeze_datetime, resolution_date):
+    """Substitute {forecast_due_date} and {resolution_date} with YYYY-MM-DD strings.
+    freeze_datetime is an ISO-8601 string (e.g. '2024-07-12T00:00:00+00:00');
+    we take its date prefix. resolution_date is already YYYY-MM-DD."""
+    if not text:
+        return text
+    due = (freeze_datetime or "")[:10]
+    res = resolution_date or ""
+    return text.replace("{forecast_due_date}", due).replace("{resolution_date}", res)
 
 
 def main():
@@ -59,17 +76,21 @@ def main():
                 skipped["duplicate"] += 1
                 continue
 
+            freeze_dt = q.get("freeze_datetime")
+            res_date = r.get("resolution_date")
+            raw_question = q.get("question") or ""
+            raw_background = q.get("background") or ""
             by_id[qid] = {
                 "id": qid,
                 "source": q.get("source"),
-                "question": q.get("question"),
-                "background": q.get("background", ""),
+                "question_text": fill_placeholders(raw_question, freeze_dt, res_date),
+                "background_text": fill_placeholders(raw_background, freeze_dt, res_date),
                 "resolution_criteria": q.get("resolution_criteria", ""),
                 "url": q.get("url", ""),
-                "freeze_datetime": q.get("freeze_datetime"),  # when the forecast was frozen
+                "freeze_datetime": freeze_dt,  # when the forecast was frozen
                 "market_info_open_datetime": q.get("market_info_open_datetime"),
                 "market_info_close_datetime": q.get("market_info_close_datetime"),
-                "resolution_date": r.get("resolution_date"),
+                "resolution_date": res_date,
                 "outcome": int(outcome),
             }
 
@@ -89,7 +110,7 @@ def main():
                                   max((r["resolution_date"] for r in records if r["resolution_date"]), default=None)],
         "records": records,
     }
-    json.dump(out, open(os.path.join(HERE, "forecastbench_normalized.json"), "w"),
+    json.dump(out, open(os.path.join(HERE, "forecastbench_clean.json"), "w"),
               ensure_ascii=False, indent=2)
 
     # console summary
@@ -103,14 +124,14 @@ def main():
     print()
     if records:
         ex = records[0]
-        print("=== EXAMPLE record (first by freeze_datetime) ===")
-        for k in ("id", "source", "question", "freeze_datetime",
+        print("=== example record (first by freeze_datetime) ===")
+        for k in ("id", "source", "question_text", "freeze_datetime",
                   "resolution_date", "outcome"):
             v = ex.get(k)
             v = (v[:120] + "...") if isinstance(v, str) and len(v) > 120 else v
             print(f"  {k}: {v}")
-        print(f"  background (first 150 chars): {ex.get('background','')[:150]}")
-    print(f"\nSaved forecastbench_normalized.json ({len(records)} records)")
+        print(f"  background_text (first 150 chars): {ex.get('background_text','')[:150]}")
+    print(f"\nSaved forecastbench_clean.json ({len(records)} records)")
 
 
 if __name__ == "__main__":

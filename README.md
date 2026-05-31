@@ -23,27 +23,27 @@ that external source arrive before calibration drifts?
 ## Main result
 
 The collapse is binary. All ten finite schedules — from daily down to once a
-year — sit in Brier `[0.21, 0.22]`. Only `never` collapses to `0.30`, bit-for-bit
-matching the raw 3B baseline. Channel thickness is set by the total volume of
-signal that passes through it across the system's lifetime, not by the
-frequency at which it arrives. A single annual debrief that flushes the whole
-backlog is equivalent to daily drip-feed when the calibration carries only 9
-topics at `K=10`.
+year — sit in Brier `[0.205, 0.220]`. Only `never` collapses to `0.298`,
+bit-for-bit matching the raw 3B baseline. Channel thickness is set by the
+total volume of signal that passes through it across the system's lifetime,
+not by the frequency at which it arrives. A single annual debrief that
+flushes the whole backlog is equivalent to daily drip-feed when the
+calibration carries only 9 topics at `K=10`.
 
 ## Scope and limitations
 
-Three points that should be read before the result is taken at face value.
+Four points that should be read before the result is taken at face value.
 
 (a) The raw Qwen2.5-3B is useless as a forecaster. On 250 random questions
-its Brier is `0.359`, worse than an `always NO` baseline (`0.340`) and much
+its Brier is `0.354`, worse than an `always NO` baseline (`0.340`) and much
 worse than `always topic base rate` (`0.224`). After the calibration run, the
-three ablations on hold-out (N=330) give: raw model only `0.304`; topic base
+three ablations on hold-out (N=330) give: raw model only `0.298`; topic base
 rate only `0.189`; mixed model+base `0.189`. The difference between the last
-two is `0.0000`. The entire benefit of calibration comes from the system
-picking up per-topic base rates — not from the model learning to forecast.
-This experiment therefore measures whether the system calibrates from an
-external signal, not whether it learned to predict the future. On a stronger
-forecaster the two questions would split.
+two rounds to `0.0000`. The entire benefit of calibration comes from the
+system picking up per-topic base rates — not from the model learning to
+forecast. This experiment therefore measures whether the system calibrates
+from an external signal, not whether it learned to predict the future. On a
+stronger forecaster the two questions would split.
 
 (b) The binary cliff is partly an artifact of batch-on-reveal logic. Every
 reveal flushes the entire accumulated queue at once, so the total volume of
@@ -58,6 +58,13 @@ itself a bottleneck and is left for follow-up work.
 is operationally equivalent to `never`. The result also depends on `K=10` and
 on the coarse 9-topic taxonomy: at finer granularity each topic accumulates
 fewer updates per reveal and rare schedules may stop holding.
+
+(d) Exact Brier values vary at the third decimal between independent runs
+because vLLM generation is not bit-reproducible on GPU. The qualitative
+result is stable across runs: the binary cliff (only `never` collapses), the
+~0.21 corridor for all finite schedules, and the c ≈ b equality (the model
+adds nothing over per-topic base rates) all hold. The numbers committed here
+are from a single representative run reproducible via the pipeline above.
 
 ## The wider series
 
@@ -95,9 +102,10 @@ After (c), the scripts in `exp6-forecast-calibration/` find their input under
 
 ```bash
 cd exp6-forecast-calibration
-python3 prepare_forecastbench.py    # normalize -> forecastbench_normalized.json
-                                    # (also writes forecastbench_clean.json
-                                    #  with substituted dates)
+python3 prepare_forecastbench.py    # build forecastbench_clean.json: normalize
+                                    # 1,646 resolved binary questions and
+                                    # substitute date placeholders into
+                                    # question_text / background_text
 python3 classify_topics.py          # Qwen2.5-7B labels each question with
                                     # one of 9 topics (~2 min)
 python3 pilot_baseline.py           # raw 3B over 50 random questions (sanity)

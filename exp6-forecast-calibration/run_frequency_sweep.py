@@ -62,7 +62,7 @@ def simulate(records, train_ids, period_days):
                                 "p_final": p_final, "is_train": r["id"] in train_ids,
                                 "day": day.isoformat()})
             pred_idx += 1
-        # evening: which resolutions ripened today -> into the pending queue
+        # evening: which resolutions come due today -> into the pending queue
         while res_idx < len(res_events) and res_events[res_idx][0] == day:
             pending.append(res_events[res_idx][1])
             res_idx += 1
@@ -147,7 +147,7 @@ def main():
     ax1.set_xticklabels([s["name"] for s in finite], rotation=35, ha="right", fontsize=9)
     ax1.set_xlabel("Period between reveals (log-scale)")
     ax1.set_ylabel("Brier on hold-out (lower = better)")
-    ax1.set_title("Where does the thin channel break? (11 points, hold-out N=330)")
+    ax1.set_title("Hold-out Brier vs reveal period (11 schedules, N=330)")
     for x, v in zip(xs_p, yc):
         ax1.annotate(f"{v:.3f}", (x, v), textcoords="offset points", xytext=(0, 9),
                      ha="center", fontweight="bold", fontsize=8)

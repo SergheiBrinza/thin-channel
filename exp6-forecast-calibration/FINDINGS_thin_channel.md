@@ -5,7 +5,7 @@
 Completion date: 2026-05-30
 
 Builds on experiments 1–3 (scar mechanics and external source of truth) and continues a
-theme that the Live-Evo project touched but did not push to its limit.
+theme that the Live-Evo project touched but did not exhaustively explore.
 
 ---
 
@@ -64,30 +64,30 @@ year / never. The same stream of questions runs through each schedule independen
 
 **Metric.** Brier score on hold-out (last 20% of the stream by `freeze_datetime`,
 N = 330). The lower the Brier, the more accurate the probabilistic forecasts. Reference
-points: raw 3B (no calibration) ~ 0.30; "always topic mean" (calibration ceiling) ~ 0.19.
+points: raw 3B (no calibration) ≈ 0.30; "always topic mean" (calibration ceiling) ≈ 0.19.
 
 ---
 
-## 3. Honest finding about the model itself
+## 3. Finding about the model itself
 
 Before measuring the thin channel, we checked what the raw 3B gives as a forecaster
 in the first place.
 
 Answer: almost nothing. On 250 random questions the baseline measurement gave:
-- raw Brier = 0.359, worse than "always NO" (0.340) and much worse than "always base
+- raw Brier = 0.354, worse than "always NO" (0.340) and much worse than "always base
   rate" (0.224);
 - the model systematically overestimates YES (mean P = 0.49 vs. real YES rate of 0.34);
 - discrimination (mean P on YES − mean P on NO) — weak and sometimes negative
   (on Politics & Elections the model assigns more probability to NO outcomes than to YES).
 
 After a full calibration run, three ablations on hold-out (N=330) showed:
-- (a) raw 3B only: Brier = 0.304;
+- (a) raw 3B only: Brier = 0.298;
 - (b) topic base rate only (no model at all): Brier = 0.189;
 - (c) our mix: Brier = 0.189 (equal to b).
 
-(c) − (b) = 0.0000. The raw 3B forecast adds nothing on top of the topic statistics.
-The entire benefit of calibration comes from the system learning the base rates across the
-9 topics.
+(c) − (b) = 0.0000 (rounded). The raw 3B forecast adds nothing on top of the topic
+statistics. The entire benefit of calibration comes from the system learning the base
+rates across the 9 topics.
 
 ### What this means for the interpretation of the experiment
 
@@ -100,34 +100,34 @@ of the model's own predictive power. On a stronger model (7B+) that would be the
 But for the main question (the thickness of the channel) it is not needed: the channel
 carries statistics, and the accumulation of those statistics is measured directly.
 
-The regression control passed cleanly. Markets & Crypto, where the model UNDER-predicts
+The regression control passed cleanly. Markets & Crypto, where the model under-predicts
 YES (the opposite bias), did not suffer: per-topic Beta for this topic learned its high
 base rate (0.57) and shifted P up, not down. Public Health, where the model was
 already well-calibrated, was not spoiled: the topic learned that almost all its questions
-resolve NO, and Brier improved further. Per-topic, not global — turned out to be the
-correct design.
+resolve NO, and Brier improved further. Per-topic calibration, not global, was the
+correct design choice.
 
 ---
 
 ## 4. Main result — the cliff is binary
 
-All 10 finite schedules (from daily to yearly) give Brier in the corridor of 0.21–0.22:
+All 10 finite schedules (from daily to yearly) give Brier in the corridor of 0.205–0.220:
 
 | Frequency | Period | Revealed | Brier (c) |
 |---|---|---|---|
-| day | 1 day | 1316 | 0.206 |
-| 3 days | 3 days | 1315 | 0.206 |
-| week | 7 days | 1313 | 0.212 |
-| 2 weeks | 14 days | 1313 | 0.211 |
-| month | 30 days | 1277 | 0.212 |
-| 2 months | 60 days | 1173 | 0.221 |
-| quarter | 90 days | 1022 | 0.222 |
-| half year | 180 days | 417 | 0.211 |
-| 270 days | 270 days | 220 | 0.219 |
-| year | 365 days | 417 | 0.223 |
-| **never** | inf | **0** | **0.304** |
+| day | 1 day | 1316 | 0.205 |
+| 3 days | 3 days | 1315 | 0.205 |
+| week | 7 days | 1313 | 0.211 |
+| 2 weeks | 14 days | 1313 | 0.210 |
+| month | 30 days | 1277 | 0.210 |
+| 2 months | 60 days | 1173 | 0.220 |
+| quarter | 90 days | 1022 | 0.220 |
+| half year | 180 days | 417 | 0.209 |
+| 270 days | 270 days | 220 | 0.217 |
+| year | 365 days | 417 | 0.220 |
+| **never** | inf | **0** | **0.298** |
 
-The difference 0.206 vs. 0.223 is within statistical noise (standard error of Brier on
+The difference 0.205 vs. 0.220 is within statistical noise (standard error of Brier on
 N=330 ~ +/- 0.015). Half-year is even slightly better than quarter — this is a fluctuation,
 not a pattern.
 
@@ -141,10 +141,10 @@ level.
 
 ## 5. Mechanics — why the cliff is binary
 
-The matter is not in frequency but in batch logic. When the system unseals the queue
-once a year in the evening, it gets in one shot everything accumulated over that year —
-about 417 resolutions in our stream. That is more than enough for the 9 topics at K=10:
-each topic gets about 46 updates on average, Beta has already converged.
+What matters is not frequency but batch logic. When the system unseals the queue once a
+year in the evening, it gets in one shot everything accumulated over that year — about
+417 resolutions in our stream. That is more than enough for the 9 topics at K=10: each
+topic gets about 46 updates on average, Beta has already converged.
 
 Daily reveal trickles in one resolution a day — the stream total is still about 1,300.
 The annual reveal is one big batch of 417. Total signal volume is comparable in both
@@ -153,7 +153,7 @@ cases.
 Conclusion: the thickness of the channel is measured not by the period but by the total
 volume of signal that has passed through it across the lifetime of the system. What
 matters is not the rhythm of reality checks but how much truth, in total, the system has
-seen at all.
+seen.
 
 This is stronger than the naive hypothesis "constant verification is needed". In fact:
 - daily verification is redundant;
@@ -164,13 +164,13 @@ This is stronger than the naive hypothesis "constant verification is needed". In
 
 ## 6. The `never` control — passed cleanly
 
-`Brier(never) = 0.3039` matched the raw 3B Brier (0.3039) bit for bit. This confirms
+`Brier(never) = 0.2980` matched the raw 3B Brier (0.2980) bit for bit. This confirms
 that the simulator is correct: without signal, Beta stays at the starting prior
 `(1, 1)`, base = 0.5 for all topics, n = 0, lam = 0, `P_final = P_raw`. Calibration is
 off, and hold-out Brier equals the raw level.
 
-A control + "upper bound without channel" is needed to distinguish "the channel works"
-from "coincidence in statistics". A precise match means the metric is clean.
+The "upper bound without channel" control matters because it distinguishes a genuine
+channel effect from statistical coincidence; the exact match shows the metric is clean.
 
 ---
 
@@ -189,6 +189,12 @@ from "coincidence in statistics". A precise match means the metric is clean.
    bottleneck.
 5. Cross-model check — 3B only. On a stronger model (7B+) the raw forecast itself
    carries signal, and the same setup would also measure the resilience of that signal.
+6. Bit-reproducibility. Exact Brier values vary at the third decimal between independent
+   runs because vLLM generation is not bit-reproducible on GPU. The qualitative result is
+   stable across runs: the binary cliff (only `never` collapses), the ~0.21 corridor for
+   all finite schedules, and the c ≈ b equality (the model adds nothing over per-topic
+   base rates) all hold. The numbers in this file are from a single representative run
+   reproducible via the pipeline above.
 
 These boundaries are material for a follow-up experiment: limit the batch size, extend
 the stream, increase the number of topics — and find a continuous threshold for channel
@@ -196,7 +202,7 @@ thickness rather than a binary cliff.
 
 ---
 
-## 8. Connection to the bigger picture
+## 8. Connection to experiments 1-5
 
 The experiments of this loop line up:
 
@@ -215,8 +221,8 @@ experiment pushes the boundary further: even rare but full contact is enough.
 
 Loop-level conclusion: a system can be honest under remarkably small contact with
 external truth — as long as that contact exists, carries enough total signal, and
-arrives through an unforgeable channel. Zero contact is a catastrophe; rare-but-thorough
-contact holds.
+arrives through an unforgeable channel. Zero contact fails; rare-but-thorough contact
+suffices.
 
 ---
 
@@ -230,8 +236,8 @@ contact holds.
 ### Data (not committed; regenerate locally — see top-level `DATA.md`)
 - `forecastbench_raw/` — ForecastBench dataset downloaded from HuggingFace
   (CC BY-SA 4.0; not redistributed in this repo)
-- `forecastbench_normalized.json` — 1,646 resolved atomic binary questions
-- `forecastbench_clean.json` — same with substituted dates instead of placeholders
+- `forecastbench_clean.json` — 1,646 resolved atomic binary questions with date
+  placeholders substituted into `question_text` / `background_text`
 - `questions_with_topics.json` — 1,646 questions with topics (9 topics, 7B classifier)
 - `raw_predictions.json` — raw forecasts from Qwen2.5-3B over all 1,646 (single batched pass)
 - `pilot_baseline.json`, `wide_baseline.json`, `calibration_results.json` — full

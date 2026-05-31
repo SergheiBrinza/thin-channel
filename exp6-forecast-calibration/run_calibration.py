@@ -49,7 +49,7 @@ def main():
         events.append((parse_dt(r["resolution_date"]), 1, "resolve", r))
     events.sort(key=lambda e: (e[0], e[1]))
 
-    # ITERATE: online predictions for ALL questions, Beta updates only on training resolutions
+    # online predictions for all questions, Beta updates only on training resolutions
     online = {}  # id -> {p_final_online, base_at_predict, n_at_predict, lam_at_predict}
     for ts, _, kind, r in events:
         t = r["topic"]
@@ -74,7 +74,7 @@ def main():
                  "lam": (beta[t]["alpha"] + beta[t]["beta"] - 2.0) / (beta[t]["alpha"] + beta[t]["beta"] - 2.0 + K)}
              for t in topics}
 
-    # hold-out ablations: use FINAL Beta for (b) and (c)
+    # hold-out ablations: use final Beta for (b) and (c)
     hold_rows = []
     for r in records:
         if r["id"] not in hold_ids:

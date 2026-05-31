@@ -1,13 +1,12 @@
 # Data and Models
 
 This repo follows a strict "code, not data" policy. The processed ForecastBench
-artifacts (`forecastbench_normalized.json`, `forecastbench_clean.json`,
-`questions_with_topics.json`, `raw_predictions.json`, `pilot_baseline.json`,
-`wide_baseline.json`, `calibration_results.json`) are derived from the
-ForecastBench dataset and are not redistributed here — the repo contains only
-our code and our aggregate results. Anyone reproducing the experiment
-downloads the original dataset themselves and regenerates the derived files by
-running the scripts.
+artifacts (`forecastbench_clean.json`, `questions_with_topics.json`,
+`raw_predictions.json`, `pilot_baseline.json`, `wide_baseline.json`,
+`calibration_results.json`) are derived from the ForecastBench dataset and are
+not redistributed here — the repo contains only our code and our aggregate
+results. Anyone reproducing the experiment downloads the original dataset
+themselves and regenerates the derived files by running the scripts.
 
 ## External dataset (not included)
 
@@ -38,7 +37,7 @@ Run, from `exp6-forecast-calibration/`:
 
 | Step | Script | Writes |
 |---|---|---|
-| 1 | `prepare_forecastbench.py` | `forecastbench_normalized.json`, `forecastbench_clean.json` |
+| 1 | `prepare_forecastbench.py` | `forecastbench_clean.json` (1,646 resolved binary Qs, date placeholders substituted into `question_text` / `background_text`) |
 | 2 | `classify_topics.py` | `questions_with_topics.json` (Qwen2.5-7B topic labels) |
 | 3 | `pilot_baseline.py` | `pilot_baseline.json` (raw 3B over 50 sample) |
 | 4 | `wide_baseline.py` | `wide_baseline.json` (raw 3B over 250 sample, per-topic) |

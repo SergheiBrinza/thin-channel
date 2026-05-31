@@ -1,4 +1,5 @@
 # Versions tested against during development.
-# vLLM pulls in transformers and torch transitively; matplotlib pulls in numpy.
+# vLLM pulls in transformers and torch transitively.
 vllm>=0.19.1,<0.20
 matplotlib>=3.10.0
+numpy>=1.26.0

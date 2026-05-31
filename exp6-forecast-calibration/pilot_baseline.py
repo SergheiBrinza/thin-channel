@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Step 3: pilot baseline. 50 random questions through Qwen2.5-3B WITHOUT calibration.
+"""Step 3: pilot baseline. 50 random questions through Qwen2.5-3B without calibration.
 Checks whether the model produces meaningful probabilities (Brier << 0.5) and whether it
 is just exploiting the class imbalance (69% NO). Writes pilot_baseline.json plus a short report."""
 import os

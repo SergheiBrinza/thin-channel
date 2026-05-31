@@ -66,7 +66,6 @@ forecastbench_raw/
 
 # Derived ForecastBench artifacts (contain question text and resolved
 # outcomes — these are CC BY-SA 4.0 content from ForecastBench, not ours)
-exp6-forecast-calibration/forecastbench_normalized.json
 exp6-forecast-calibration/forecastbench_clean.json
 exp6-forecast-calibration/questions_with_topics.json
 
