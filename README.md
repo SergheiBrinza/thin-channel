@@ -32,7 +32,12 @@ calibration carries only 9 topics at `K=10`.
 
 ## Scope and limitations
 
-Four points that should be read before the result is taken at face value.
+Five points that should be read before the result is taken at face value.
+
+(0) The subject model is frozen and decoding is greedy, so a rerun reproduces
+an identical state. Across the Second Loop series the headline 100% figures are
+partly a property of that determinism; what we stand behind is the shape of the
+result, not the round number.
 
 (a) The raw Qwen2.5-3B is useless as a forecaster. On 250 random questions
 its Brier is `0.354`, worse than an `always NO` baseline (`0.340`) and much
