@@ -1,5 +1,7 @@
 # Thin Channel — how rarely external truth can arrive before a self-calibrating system collapses
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21845022.svg)](https://doi.org/10.5281/zenodo.21845022)
+
 Part 3 of 3 of the Second Loop project.
 
 ## What this repo contains
