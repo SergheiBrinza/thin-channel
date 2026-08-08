@@ -24,11 +24,13 @@ that external source arrive before calibration drifts?
 
 The collapse is binary. All ten finite schedules — from daily down to once a
 year — sit in Brier `[0.205, 0.220]`. Only `never` collapses to `0.298`,
-bit-for-bit matching the raw 3B baseline. Channel thickness is set by the
-total volume of signal that passes through it across the system's lifetime,
-not by the frequency at which it arrives. A single annual debrief that
-flushes the whole backlog is equivalent to daily drip-feed when the
-calibration carries only 9 topics at `K=10`.
+bit-for-bit matching the raw 3B baseline. Neither frequency nor delivered
+volume is the binding constraint here: the 270-day schedule delivers 220
+resolutions and reaches `0.216`, the daily schedule delivers 1,316 and reaches
+`0.205` — a six-fold difference in signal moves the score by `0.011`, while the
+gap to no contact at all is `0.08`–`0.09`. With 9 topics at `K=10` the
+calibration saturates after a few hundred resolutions, so the experiment
+separates contact from no contact and says nothing finer.
 
 ## Scope and limitations
 
@@ -51,12 +53,11 @@ from an external signal, not whether it learned to predict the future. On a
 stronger forecaster the two questions would split.
 
 (b) The binary cliff is partly an artifact of batch-on-reveal logic. Every
-reveal flushes the entire accumulated queue at once, so the total volume of
-signal across the 17-month stream is approximately the same regardless of
-period — daily drip (about 1,300 resolutions over the stream) and an annual
-flush (about 417 in a single batch) are both well above the convergence point
-for 9 topics at `K=10`. This is why we phrase the result as "channel thickness
-is total volume, not frequency". A bounded-batch variant would make frequency
+reveal flushes the entire accumulated queue at once. Delivered volume still
+varies a lot by period — 1,316 resolutions for the daily schedule, 417 for the
+annual one, 220 for the 270-day one — but every one of those totals is already
+past the convergence point for 9 topics at `K=10`, which is why the scores stay
+within `0.015` of each other. A bounded-batch variant would make frequency
 itself a bottleneck and is left for follow-up work.
 
 (c) The stream is 17 months long, so any reveal period longer than the stream

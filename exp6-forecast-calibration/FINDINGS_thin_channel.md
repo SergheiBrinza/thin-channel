@@ -12,7 +12,8 @@ theme that the Live-Evo project touched but did not exhaustively explore.
 ## 1. Goal
 
 Experiment 3 showed that an external unforgeable source of truth (Wikipedia) cures the
-system's blind spots — the ceiling of memory protection rose from 64% to 100%. But how
+system's blind spots — the ceiling of memory protection rose from 64% to 92.9% (13/14),
+and to 100% once one ambiguous trap (#46) was reformulated. But how
 much of this external signal is needed? Giving it constantly is expensive. Giving it
 rarely lets the system drift. Where is the boundary?
 
@@ -146,18 +147,22 @@ year in the evening, it gets in one shot everything accumulated over that year �
 417 resolutions in our stream. That is more than enough for the 9 topics at K=10: each
 topic gets about 46 updates on average, Beta has already converged.
 
-Daily reveal trickles in one resolution a day — the stream total is still about 1,300.
-The annual reveal is one big batch of 417. Total signal volume is comparable in both
-cases.
+Delivered volume differs several-fold between schedules — about 1,316 resolutions for the
+daily reveal, 417 for the annual one, 220 for the 270-day one. That difference barely
+shows up in hold-out Brier, because the calibrator saturates well before the smallest of
+those totals is reached.
 
-Conclusion: the thickness of the channel is measured not by the period but by the total
-volume of signal that has passed through it across the lifetime of the system. What
-matters is not the rhythm of reality checks but how much truth, in total, the system has
-seen.
+Conclusion: neither frequency nor delivered volume is the binding constraint here. The
+270-day schedule delivers 220 resolutions and reaches 0.216, the daily schedule delivers
+1,316 and reaches 0.205 — a six-fold difference in signal moves the score by 0.011, while
+the gap to no contact at all is 0.08–0.09. With 9 topics at K=10 the calibration saturates
+after a few hundred resolutions, so the experiment separates contact from no contact and
+says nothing finer.
 
-This is stronger than the naive hypothesis "constant verification is needed". In fact:
-- daily verification is redundant;
-- a single annual reveal with full settlement is almost equivalent;
+This does speak against the naive hypothesis "constant verification is needed" — daily
+verification is not required. But it is also the limit of what the experiment supports:
+- it separates the presence of contact from its absence;
+- it cannot tell the finite schedules apart — they all land within 0.015 of each other;
 - full absence is a catastrophe.
 
 ---
@@ -209,7 +214,8 @@ The experiments of this loop line up:
 - #1 (Scar): the mechanism for correcting a memorized error works and survives reload.
 - #2 (Gatekeeper 1.0): a clone of the model as verifier hits a ceiling of 64% —
   same-family blind spots.
-- #3 (Gatekeeper 2.0): a real external source of truth lifts the ceiling to 100%.
+- #3 (Gatekeeper 2.0): a real external source of truth lifts the ceiling to 92.9% (13/14),
+  and to 100% once one ambiguous trap (#46) was reformulated.
 - #4 + #5 (scar-survival metric validation): the metric is universal and distinguishes
   real corrections from spurious ones.
 - #6 (Thin channel): of that same external source of truth, very little is needed —
