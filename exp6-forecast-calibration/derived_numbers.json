@@ -1,5 +1,47 @@
 {
   "committed_aggregates": {
+    "per_schedule": {
+      "day": {
+        "base_minus_mix": 0.0054,
+        "base_share_of_gain_vs_never": 0.94
+      },
+      "3 days": {
+        "base_minus_mix": 0.0054,
+        "base_share_of_gain_vs_never": 0.94
+      },
+      "week": {
+        "base_minus_mix": 0.0073,
+        "base_share_of_gain_vs_never": 0.92
+      },
+      "2 weeks": {
+        "base_minus_mix": 0.0077,
+        "base_share_of_gain_vs_never": 0.91
+      },
+      "month": {
+        "base_minus_mix": 0.0077,
+        "base_share_of_gain_vs_never": 0.91
+      },
+      "2 months": {
+        "base_minus_mix": 0.0106,
+        "base_share_of_gain_vs_never": 0.86
+      },
+      "quarter": {
+        "base_minus_mix": 0.011,
+        "base_share_of_gain_vs_never": 0.86
+      },
+      "half year": {
+        "base_minus_mix": 0.011,
+        "base_share_of_gain_vs_never": 0.88
+      },
+      "270 days": {
+        "base_minus_mix": 0.015,
+        "base_share_of_gain_vs_never": 0.82
+      },
+      "year": {
+        "base_minus_mix": -0.0033,
+        "base_share_of_gain_vs_never": 1.04
+      }
+    },
     "offline_end_of_stream": {
       "brier_raw": 0.298,
       "brier_base_only": 0.189,

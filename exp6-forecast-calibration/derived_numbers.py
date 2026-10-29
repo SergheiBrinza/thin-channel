@@ -32,7 +32,17 @@ def part_a():
     vals = [s["holdout_brier_final"] for s in finite]
     lo, hi = min(vals), max(vals)
     spread = hi - lo
+    never_b = never["holdout_brier_final"]
+    per_schedule = {
+        s["name"]: {
+            "base_minus_mix": round(s["holdout_brier_base_only"] - s["holdout_brier_final"], 4),
+            "base_share_of_gain_vs_never": round(
+                (never_b - s["holdout_brier_base_only"]) / (never_b - s["holdout_brier_final"]), 2),
+        }
+        for s in finite
+    }
     return {
+        "per_schedule": per_schedule,
         "offline_end_of_stream": {
             "brier_raw": calib["brier_a_raw"],
             "brier_base_only": calib["brier_b_base_only"],
