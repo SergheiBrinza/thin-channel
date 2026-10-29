@@ -1,0 +1,47 @@
+{
+  "committed_aggregates": {
+    "offline_end_of_stream": {
+      "brier_raw": 0.298,
+      "brier_base_only": 0.189,
+      "brier_mix": 0.1889,
+      "gap_raw_minus_mix": 0.1091,
+      "gap_base_minus_mix": 0.0001
+    },
+    "online_daily": {
+      "brier_raw": 0.298,
+      "brier_base_only": 0.2103,
+      "brier_mix": 0.205,
+      "gap_raw_minus_mix": 0.093,
+      "gap_base_minus_mix": 0.0054
+    },
+    "finite_schedules": {
+      "n_schedules": 10,
+      "brier_min": 0.205,
+      "brier_min_schedule": "day",
+      "brier_max": 0.2202,
+      "brier_max_schedule": "quarter",
+      "spread": 0.0153
+    },
+    "never_vs_finite": {
+      "brier_never": 0.298,
+      "gap_min": 0.0777,
+      "gap_max": 0.093,
+      "gap_min_over_spread": 5.1,
+      "gap_max_over_spread": 6.1
+    }
+  },
+  "from_raw_predictions": {
+    "n_total": 1646,
+    "n_train": 1316,
+    "n_holdout": 330,
+    "lookahead": {
+      "train_outcomes_visible_at_holdout_forecast_min": 336,
+      "train_outcomes_visible_at_holdout_forecast_median": 649.0,
+      "train_outcomes_visible_at_holdout_forecast_max": 1276,
+      "train_outcomes_resolved_after_last_holdout_forecast": 40,
+      "holdout_forecasts_using_future_outcomes_offline": 330
+    },
+    "holdout_forecasts_before_day_365": 64,
+    "first_holdout_forecast_day": 321
+  }
+}
